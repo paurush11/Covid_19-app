@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:covid_19app/screens/payment.dart';
 import 'contact.dart';
 import 'package:covid_19app/reusable_card.dart';
+import 'temperature.dart';
 
 class FirstScreen extends StatefulWidget {
   FirstScreen({ @required this.locationData, this.coviddata});
@@ -44,59 +45,68 @@ class _FirstScreenState extends State<FirstScreen> {
     List<int> confirmed = new List<int>();
     List<int> recovered = new List<int>();
     List<int> deaths = new List<int>();
-    List<int>Values = [36,15,31,39,75,11,24,14,32,35,38,35,37,34,52,22,29,22,24,20,13,3,4,8,12,1,17,25,11,12,2,2,4,11,0,1,0];
+    List<int>Values = [36,15,31,39,75,11,24,14,32,35,38,35,37,34,52,29,22,22,24,20,13,3,4,8,12,17,1,25,11,12,2,2,4,11,0,1,0];
     Map<int,List> names = new Map<int,List>();
     Map<int,List> Cases = new Map<int,List>();
 
-    for(int i = 0;i<37;i++)
+   try{
+     for(int i = 0;i<37;i++)
+     {
+       String st = data[i]['state'];
+       States.add(st??"null");
+       int act = data[i]['active'];
+       int con = data[i]['confirmed'];
+       int rec = data[i]['recovered'];
+       int death = data[i]['deaths'];
+       active.add(act);
+       confirmed.add(con);
+       recovered.add(rec);
+       deaths.add(death);
+       List<String> ID = new List<String>();
+       List<int> Placecases = new List<int>();
+
+       int j = 0;
+       while(j<Values[i])
+       {
+         String id = data[i]["districtData"][j]["id"];
+         int placecases = data[i]["districtData"][j]["confirmed"];
+         ID.add(id);
+         Placecases.add(placecases);
+         j++;
+       }
+       names.putIfAbsent(i, () => ID);
+       Cases.putIfAbsent(i, () => Placecases);
+     }
+   }catch(e)
     {
-      String st = data[i]['state'];
-      States.add(st??"null");
-      int act = data[i]['active'];
-      int con = data[i]['confirmed'];
-      int rec = data[i]['recovered'];
-      int death = data[i]['deaths'];
-      active.add(act);
-      confirmed.add(con);
-      recovered.add(rec);
-      deaths.add(death);
-      List<String> ID = new List<String>();
-      List<int> Placecases = new List<int>();
-
-      int j = 0;
-      while(j<Values[i])
-        {
-          String id = data[i]["districtData"][j]["id"];
-          int placecases = data[i]["districtData"][j]["confirmed"];
-          ID.add(id);
-          Placecases.add(placecases);
-          j++;
-        }
-        names.putIfAbsent(i, () => ID);
-      Cases.putIfAbsent(i, () => Placecases);
-
+      print("Json file data dekh ek baar agar range error hai to");
     }
 
-    for(int i = 0;i<37;i++)
+    try{
+      for(int i = 0;i<37;i++)
       {
         if(region ==States[i])
-          {
-            activecases = active[i];
-            confirmedcases = confirmed[i];
-            Recoveredcases = recovered[i];
-            deathcases = deaths[i];
-          }
+        {
+          activecases = active[i];
+          confirmedcases = confirmed[i];
+          Recoveredcases = recovered[i];
+          deathcases = deaths[i];
+        }
         List nameofdistrict = names[i];
         List districtcases = Cases[i];
 
         for(int j = 0;j<nameofdistrict.length;j++)
+        {
+          if(place == nameofdistrict[j])
           {
-            if(place == nameofdistrict[j])
-              {
-                cases = districtcases[j];
-              }
+            cases = districtcases[j];
           }
+        }
       }
+    }catch(e)
+    {
+      print(e);
+    }
 
   }
 
@@ -164,6 +174,11 @@ class _FirstScreenState extends State<FirstScreen> {
                             ),
                             Roundiconbutton(
                               icon: FontAwesomeIcons.thermometer,
+                              onpress: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (context){
+                                  return Temperature();
+                                }));
+                              },
 
                             )
 
