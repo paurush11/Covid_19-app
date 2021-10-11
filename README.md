@@ -16,6 +16,6 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 
-# Description
+>> Description <<
 This App will help you in informing the cases around you and across India. This will give you the current figures of cases. Probability of getting you infected and syptoms regarding covid will be displayed.
  
