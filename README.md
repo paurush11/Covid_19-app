@@ -6,7 +6,7 @@ A new Flutter application designed in need of covid -19
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+A few resources to get you started if this is your first Flutter projects :
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
