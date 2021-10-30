@@ -1,6 +1,6 @@
 # covid_19app
 
-A new Flutter application designed in need of covid -19
+A new Flutter application designed in need of Covid-19
 
 ## Getting Started
 
