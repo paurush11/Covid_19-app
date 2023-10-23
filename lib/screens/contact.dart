@@ -115,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Text("Kerala "),
-                        Text("0471-2552056")
+                        Text("786-12552056")
                       ],
                     ),
                     Row(
